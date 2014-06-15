@@ -30,7 +30,7 @@ TARGET_BOOTLOADER_BOARD_NAME 			:= torino
 
 # Kernel source
 TARGET_KERNEL_CUSTOM_TOOLCHAIN			:= arm-eabi-4.4.3
-TARGET_KERNEL_SOURCE				:= kernel/samsung/bcm21553-common/common
+TARGET_KERNEL_SOURCE				:= kernel/samsung/bcm21553-common
 
 # Recovery
 BOARD_BOOTIMAGE_PARTITION_SIZE			:= 7357568
