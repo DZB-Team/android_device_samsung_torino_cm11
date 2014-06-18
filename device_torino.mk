@@ -12,6 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Init files
+PRODUCT_COPY_FILES += \
+    device/samsung/tassve/ramdisk/init.gt-s6102board.sensors.rc:root/init.gt-s6102board.sensors.rc
+
 # Inherit products
 $(call inherit-product, device/samsung/bcm21553-common/common.mk)
 $(call inherit-product, vendor/samsung/torino/vendor.mk)
