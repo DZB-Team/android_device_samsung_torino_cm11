@@ -6,8 +6,9 @@ on post-fs-data
     chmod 0660 /data/misc/sensors/accel_offset
 
 # backlight
-    chown system system /sys/class/backlight/aat1401-backlight/brightness
+#    chown system system /sys/class/backlight/aat1401-backlight/brightness
     chown system system /sys/class/backlight/pwm-keypad-backlight.0/brightness
+    chown system system /sys/class/backlight/sec-backlight/brightness
 
 # proximity
     chown system input /sys/class/input/input0/delay
