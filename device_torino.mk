@@ -14,7 +14,7 @@
 
 # Init files
 PRODUCT_COPY_FILES += \
-    device/samsung/tassve/ramdisk/init.gt-s6102board.sensors.rc:root/init.gt-s6102board.sensors.rc
+    device/samsung/torino/ramdisk/init.gt-s6102board.sensors.rc:root/init.gt-s6102board.sensors.rc
 
 # Inherit products
 $(call inherit-product, device/samsung/bcm21553-common/common.mk)
