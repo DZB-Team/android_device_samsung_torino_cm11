@@ -4,32 +4,29 @@ on post-fs-data
     mkdir /data/misc/sensors 0777 system misc
     chmod 0660 /data/misc/sensors/ecs_nvm
     chmod 0660 /data/misc/sensors/accel_offset
+    chown root system /dev/hscd_i2c
+    chmod 0660 /dev/hscd_i2c
+    chown root system /dev/alps_io
+    chmod 0660 /dev/alps_io
 
 # backlight
-#    chown system system /sys/class/backlight/aat1401-backlight/brightness
-    chown system system /sys/class/backlight/pwm-keypad-backlight.0/brightness
     chown system system /sys/class/backlight/sec-backlight/brightness
 
 # proximity
-    chown system input /sys/class/input/input1/delay
     chown system input /sys/class/input/input1/enable
-    chown system input /sys/class/input/input1/poll_delay
-    chown system input /sys/class/input/input1/wake
     chmod 0660 /sys/class/input/input1/enable
-    chmod 0660 /sys/class/input/input1/poll_delay
+    chown root system /dev/proximity
+    chmod 0660 /dev/proximity
 
 # accelerometer
-    chown system input /sys/class/input/input0/delay
-    chown system input /sys/class/input/input0/enable
-    chown system input /sys/class/input/input0/wake
+    chown system system /sys/class/input/input0/enable
+    chown system system /sys/class/input/input0/poll_delay
+    chmod 0660 /sys/class/input/input0/enable
+    chmod 0660 /sys/class/input/input0/poll_delay
 
 # geomagnetic
-    chown system input /sys/class/input/input2/delay
-    chown system input /sys/class/input/input2/enable
-    chown system input /sys/class/input/input2/wake
-
-# geomagnetic_raw
-    chown compass input /sys/class/input/input2/offsets
+    chown root system /dev/bma222
+    chmod 0660 /dev/bma222
 
 # orientation
     chown system input /sys/class/input/input5/enable
