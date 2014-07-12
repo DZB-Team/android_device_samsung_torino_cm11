@@ -14,7 +14,8 @@
 
 # Init files
 PRODUCT_COPY_FILES += \
-    device/samsung/torino/ramdisk/init.gt-s6102board.sensors.rc:root/init.gt-s6102board.sensors.rc
+    device/samsung/torino/ramdisk/init.gt-s6102board.sensors.rc:root/init.gt-s6102board.sensors.rc \
+    device/samsung/torino/ramdisk/init.bcm21553.rc:root/init.bcm21553.rc
 
 # Inherit products
 $(call inherit-product, device/samsung/bcm21553-common/common.mk)
@@ -24,6 +25,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.ril_class=SamsungBCMRIL \
     ro.telephony.call_ring.multiple=0 \
     ro.telephony.call_ring=0 \
+    persist.radio.multisim.config=dsds \
 
 # Add device package overlay
 DEVICE_PACKAGE_OVERLAYS += device/samsung/torino/overlay

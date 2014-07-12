@@ -1,0 +1,70 @@
+import init.bcm21553.bt.rc
+import init.bcm21553.fs.rc
+import init.bcm21553.gps.rc
+import init.bcm21553.sensors.rc
+import init.bcm21553.swapart.rc
+import init.bcm21553.usb.rc
+import init.bcm21553.wifi.rc
+
+on init
+
+    # sdcard
+    mkdir /mnt/media_rw/sdcard0 0700 media_rw media_rw
+    mkdir /storage/sdcard0 0700 root root
+
+    symlink /storage/sdcard0 /mnt/sdcard
+    symlink /storage/sdcard0 /sdcard
+    export EXTERNAL_STORAGE /storage/sdcard0
+
+    # sd-ext
+    mkdir /sd-ext 0771 system system
+    export SD_EXT_DIRECTORY /sd-ext
+
+    # media codecs (workaround)
+    symlink /system/etc/media_codecs.xml /etc/media_codecs.xml
+
+    # media profiles (workaround)
+    symlink /system/etc/media_profiles.xml /etc/media_profiles.xml
+
+    # We will create our own ril-daemon service with different perm and sockets
+    stop ril-daemon
+on fs
+
+# mount device partitions
+    mount_all /fstab.bcm21553
+    swapon_all /fstab.bcm21553
+
+on post-fs-data
+
+    chown system system /sys/module/bcm215xx_pm/parameters/debug
+
+# Force Power Down
+    chmod 0660 /sys/class/sec/pm/power_down
+    chown root system /sys/class/sec/pm/power_down
+
+# CPU Governor
+    chmod 0660 /sys/class/sec/cpu/cpu_gov
+    chown root system /sys/class/sec/cpu/cpu_gov
+    
+# waketime CSP461560
+    chown radio system /sys/module/bcm_fuse_net/parameters/pdp_waketime
+
+# audio debug (needed for ALSA driver routing)
+    chown system audio /sys/devices/platform/brcm_alsa_device/sound/card0/controlC0/BrcmAud_DrvTest
+
+service fuse_sdcard0 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard0 /storage/sdcard0
+    class late_start
+    disabled
+
+service charger /charger
+    class charger
+
+on post-fs
+service ril-daemon /system/bin/rild
+    class main
+    socket rild stream 660 root radio
+    socket rild1 stream 660 root radio
+    socket rild-debug stream 660 radio system
+    user root
+    group radio cache inet misc audio sdcard_rw qcom_oncrpc qcom_diag log
+
