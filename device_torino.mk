@@ -20,6 +20,11 @@ PRODUCT_COPY_FILES += \
 $(call inherit-product, device/samsung/bcm21553-common/common.mk)
 $(call inherit-product, vendor/samsung/torino/vendor.mk)
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.telephony.ril_class=SamsungBCMRIL \
+    ro.telephony.call_ring.multiple=0 \
+    ro.telephony.call_ring=0 \
+
 # Add device package overlay
 DEVICE_PACKAGE_OVERLAYS += device/samsung/torino/overlay
 
