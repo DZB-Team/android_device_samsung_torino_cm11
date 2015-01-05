@@ -345,6 +345,7 @@ public class SamsungBCMRIL extends RIL implements CommandsInterface {
             dc.als = p.readInt();
             voiceSettings = p.readInt();
             dc.isVoice = (0 == voiceSettings) ? false : true;
+            int isvideo = p.readInt();
             //Some Samsung magic data for Videocalls
             // hack taken from smdk4210ril class
             voiceSettings = p.readInt();
