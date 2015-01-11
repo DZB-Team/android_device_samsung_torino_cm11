@@ -43,3 +43,6 @@ TARGET_RECOVERY_LCD_BACKLIGHT_PATH		:= \"/sys/class/backlight/sec-backlight/brig
 
 # Kernel config
 TARGET_KERNEL_CONFIG				:= cm_torino_defconfig
+
+# TWRP
+DEVICE_RESOLUTION 		:= 240x320
